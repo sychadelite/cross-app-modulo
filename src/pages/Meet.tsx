@@ -7,12 +7,12 @@ import { banSharp, ban, trash, create } from "ionicons/icons";
 import React, { useRef, useState } from "react";
 
 export const FRIENDS_DATA = [
-    { id: 'f1', name: 'John Thor' },
-    { id: 'f2', name: 'John Nees' },
-    { id: 'f3', name: 'John Doe' }
+    { id: 'f1', name: 'Mohammad Barj Lazuardi Dindashwara' },
+    { id: 'f2', name: 'Muhammad Adam Canrayneldi' },
+    { id: 'f3', name: 'Idham Noor Faidzi' },
+    { id: 'f4', name: 'Fhicky Lukmansyah' },
+    { id: 'f5', name: 'Michael Handi' }
 ];
-
-
 
 const Meet: any = () => {
     var [counter, setCounter] = useState(0);
@@ -31,19 +31,10 @@ const Meet: any = () => {
         }
     });
 
-    useIonViewWillEnter(() => {
-        // console.log('ionViewWillEnter event fired');
-    });
-
-    useIonViewWillLeave(() => {
-        // console.log('ionViewWillLeave event fired');
-    });
-
-
 
     const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null)
-    const callFriendHandler = () => {
-        console.log("Calling...");
+    const callFriendHandler = (args: String) => {
+        console.log("Calling...", args);
     };
     const blockFriendHandler = (event: React.MouseEvent) => {
         slidingOptionsRef.current?.closeOpened();
@@ -68,7 +59,7 @@ const Meet: any = () => {
                     <IonButtons slot="start">
                         <IonMenuButton/>
                     </IonButtons>
-                    <IonTitle>Ionic Mail</IonTitle>
+                    <IonTitle>All Meet</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
@@ -90,8 +81,8 @@ const Meet: any = () => {
                             </IonItemOptions>
                             <IonItem lines="full"
                                 button
-                                onClick={callFriendHandler}
-                                routerLink="/tabs/mail"
+                                onClick={() => callFriendHandler(`${friend.name}`)}
+                                routerLink={`/tabs/meet/${friend.id}`}
                             >
                                 <IonAvatar class="ion-margin-end">
                                     <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
