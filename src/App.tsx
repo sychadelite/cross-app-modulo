@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import { IonApp, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonRouterOutlet, IonTitle, IonToolbar, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 
@@ -21,19 +21,49 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { list, warning, settings } from 'ionicons/icons';
+import MailDetail from './pages/MailDetail';
+import MailTabs from './pages/MailTabs';
+import Settings from './pages/Settings';
+import Spam from './pages/Spam';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
+
+      <IonMenu contentId="main">
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>IonMail</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonList>
+            <IonMenuToggle>
+              <IonItem button routerLink="/tabs/mail">
+                <IonIcon slot="start" icon={list} />
+                <IonLabel>All Mail</IonLabel>
+              </IonItem>
+              <IonItem button routerLink="/tabs/spam">
+                <IonIcon slot="start" icon={warning} />
+                <IonLabel>Spam</IonLabel>
+              </IonItem>
+              <IonItem button routerLink="/settings">
+                <IonIcon slot="start" icon={settings} />
+                <IonLabel>Settings</IonLabel>
+              </IonItem>
+            </IonMenuToggle>
+          </IonList>
+        </IonContent>
+      </IonMenu>
+      <IonRouterOutlet id="main">
+        <Route path="/tabs" component={MailTabs} />
+        <Route path="/mail/:mailId" component={MailDetail} />
+        <Route path="/tabs/spam" component={Spam} />
+        <Route path="/settings" component={Settings} />
+        <Redirect exact from='/' to='/tabs' />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
