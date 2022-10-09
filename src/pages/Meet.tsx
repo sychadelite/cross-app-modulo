@@ -1,9 +1,9 @@
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar, 
+import { IonAvatar, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar, 
     useIonViewDidEnter,
     useIonViewDidLeave,
     useIonViewWillEnter,
     useIonViewWillLeave } from "@ionic/react";
-import { banSharp, ban, trash, create } from "ionicons/icons";
+import { ban, trash, create } from "ionicons/icons";
 import React, { useRef, useState } from "react";
 
 export const FRIENDS_DATA = [
@@ -16,7 +16,6 @@ export const FRIENDS_DATA = [
 
 const Meet: any = () => {
     var [counter, setCounter] = useState(0);
-    var [path, setPath] = useState(window.location.pathname);
 
     const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null)
     
@@ -58,7 +57,7 @@ const Meet: any = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonButtons slot="start" onClick={() => checkPathname(path)}>
+                    <IonButtons slot="start">
                         <IonMenuButton/>
                     </IonButtons>
                     <IonTitle>All Meet</IonTitle>
@@ -97,23 +96,6 @@ const Meet: any = () => {
             </IonContent>
         </IonPage>
     )
-}
-
-const checkPathname = (args: String) => {
-    const items = document.getElementsByClassName('sidebar-menu-link')
-    const contraPath = '/tabs/mail'
-    for(let i=0; i<items.length; i++) {
-        if(items[i].getAttribute('href') === args) {
-            items[i].removeAttribute('hidden')
-            items[i].setAttribute('color', 'secondary')
-        } else {
-            if(items[i].getAttribute('href') === contraPath) {
-                items[i].setAttribute('hidden', 'true')
-            }
-            items[i].setAttribute('color', '')
-        }
-    }
-}
-
+};
 
 export default Meet;

@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonCard, IonCardContent, IonContent, IonHeader, IonMenuButton, IonPage, IonRouterOutlet, IonTitle, IonToolbar, useIonViewDidEnter, useIonViewDidLeave } from "@ionic/react";
+import { IonButton, IonButtons, IonCard, IonCardContent, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, useIonViewDidEnter, useIonViewDidLeave } from "@ionic/react";
 import { useState } from "react";
 
 export const MAIL_DATA = [
@@ -11,7 +11,6 @@ export const MAIL_DATA = [
 
 const Mail: React.FC = () => {
     var [counter, setCounter] = useState(0);
-    var [path, setPath] = useState(window.location.pathname);
     
     useIonViewDidEnter(() => {
         setCounter(counter++);
@@ -28,13 +27,13 @@ const Mail: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonButtons slot="start" onClick={() => checkPathname(path)}>
+                    <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
                     <IonTitle>All Mail</IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonContent className="ion-padding">
+            <IonContent className="ion-padding" scrollY={true}>
                 {MAIL_DATA.map(mail => (
                     <IonCard key={mail.id}>
                         <IonCardContent className="ion-text-center">
@@ -49,22 +48,5 @@ const Mail: React.FC = () => {
         </IonPage>
     )
 };
-
-const checkPathname = (args: String) => {
-    const items = document.getElementsByClassName('sidebar-menu-link')
-    const contraPath = '/tabs/meet'
-    for(let i=0; i<items.length; i++) {
-        if(items[i].getAttribute('href') === args) {
-            items[i].removeAttribute('hidden')
-            items[i].setAttribute('color', 'secondary')
-        } else {
-            if(items[i].getAttribute('href') === contraPath) {
-                items[i].setAttribute('hidden', 'true')
-            }
-            items[i].setAttribute('color', '')
-        }
-    }
-}
-
 
 export default Mail;

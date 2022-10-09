@@ -5,6 +5,7 @@ import { MAIL_DATA } from "./Mail";
 const MailDetail: React.FC = () => {
     const mId = useParams<{mailId: string}>().mailId;
     const selectedMail = MAIL_DATA.find(m => m.id === mId);
+    
     return(
         <IonPage>
             <IonHeader>
@@ -21,13 +22,12 @@ const MailDetail: React.FC = () => {
                 <h2>Mail ID: {mId}</h2>
             </IonContent>
         </IonPage>
-    );
-}
+    )
+};
 
 function truncate(arg0: any | undefined): import("react").ReactNode {
     return arg0.length > 50 ? arg0.substring(0, 50) + " ..." : arg0;
-}
-
+};
 
 export default MailDetail;
 

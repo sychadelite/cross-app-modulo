@@ -1,4 +1,4 @@
-import { IonIcon, IonLabel, IonPage, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from "@ionic/react"
+import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from "@ionic/react"
 import { mailOutline, videocamOutline } from "ionicons/icons";
 import { Redirect, Route } from "react-router";
 
@@ -10,7 +10,7 @@ import Meet from "./Meet"
 import MeetDetail from "./MeetDetail";
 import Spam from "./Spam";
 
-const MailTabs: React.FC = () => {
+const Tabs: React.FC = () => {
     return (
         <IonTabs>
             <IonRouterOutlet>
@@ -32,7 +32,7 @@ const MailTabs: React.FC = () => {
                 </IonTabButton>
             </IonTabBar>
         </IonTabs>
-    );
+    )
 };
 
-export default MailTabs;
+export default Tabs;
