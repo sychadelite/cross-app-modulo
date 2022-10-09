@@ -16,23 +16,25 @@ export const FRIENDS_DATA = [
 
 const Meet: any = () => {
     var [counter, setCounter] = useState(0);
+    var [path, setPath] = useState(window.location.pathname);
+
+    const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null)
     
     useIonViewDidEnter(() => {
         setCounter(counter++);
         if(counter === 1) {
-            console.log('ionViewDidEnter event fired');
         }
     });
-
     useIonViewDidLeave(() => {
         setCounter(counter--);
         if(counter === 0) {
-            console.log('ionViewDidLeave event fired');
         }
     });
+    useIonViewWillEnter(() => {
+    });  
+    useIonViewWillLeave(() => {
+    });
 
-
-    const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null)
     const callFriendHandler = (args: String) => {
         console.log("Calling...", args);
     };
@@ -56,7 +58,7 @@ const Meet: any = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonButtons slot="start">
+                    <IonButtons slot="start" onClick={() => checkPathname(path)}>
                         <IonMenuButton/>
                     </IonButtons>
                     <IonTitle>All Meet</IonTitle>
@@ -97,6 +99,21 @@ const Meet: any = () => {
     )
 }
 
+const checkPathname = (args: String) => {
+    const items = document.getElementsByClassName('sidebar-menu-link')
+    const contraPath = '/tabs/mail'
+    for(let i=0; i<items.length; i++) {
+        if(items[i].getAttribute('href') === args) {
+            items[i].removeAttribute('hidden')
+            items[i].setAttribute('color', 'secondary')
+        } else {
+            if(items[i].getAttribute('href') === contraPath) {
+                items[i].setAttribute('hidden', 'true')
+            }
+            items[i].setAttribute('color', '')
+        }
+    }
+}
 
 
 export default Meet;

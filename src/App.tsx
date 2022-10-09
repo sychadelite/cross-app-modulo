@@ -1,7 +1,6 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonContent, IonFooter, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonRouterOutlet, IonTitle, IonToggle, IonToolbar, setupIonicReact, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
+import { IonApp, IonContent, IonFooter, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonRouterOutlet, IonTitle, IonToggle, IonToolbar, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -26,35 +25,10 @@ import MailDetail from './pages/MailDetail';
 import MailTabs from './pages/Tabs';
 import Settings from './pages/Settings';
 import Spam from './pages/Spam';
-import { useState } from 'react';
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  var [counter, setCounter] = useState(0);
-    
-  useIonViewDidEnter(() => {
-      setCounter(counter++);
-      if(counter === 1) {
-          console.log('ionViewDidEnter event fired');
-      }
-  });
-
-  useIonViewDidLeave(() => {
-      setCounter(counter--);
-      if(counter === 0) {
-          console.log('ionViewDidLeave event fired');
-      }
-  });
-
-  useIonViewWillEnter(() => {
-      // console.log('ionViewWillEnter event fired');
-  });
-
-  useIonViewWillLeave(() => {
-      // console.log('ionViewWillLeave event fired');
-  });
-  
   return (
     <IonApp>
       <IonReactRouter>
@@ -62,22 +36,26 @@ const App: React.FC = () => {
         <IonMenu contentId="main">
           <IonHeader>
             <IonToolbar>
-              <IonTitle>IonMail</IonTitle>
+              <IonTitle>Menu</IonTitle>
             </IonToolbar>
           </IonHeader>
 
           <IonContent>
             <IonList>
               <IonMenuToggle>
-                <IonItem button routerLink="/tabs/mail" color="secondary">
+                <IonItem button routerLink="/tabs/mail" class="sidebar-menu-link">
                   <IonIcon slot="start" icon={list} />
                   <IonLabel>All Mail</IonLabel>
                 </IonItem>
-                <IonItem button routerLink="/tabs/spam">
+                <IonItem button routerLink="/tabs/meet" class="sidebar-menu-link">
+                  <IonIcon slot="start" icon={list} />
+                  <IonLabel>All Meet</IonLabel>
+                </IonItem>
+                <IonItem button routerLink="/tabs/spam" class="sidebar-menu-link">
                   <IonIcon slot="start" icon={warning} />
                   <IonLabel>Spam</IonLabel>
                 </IonItem>
-                <IonItem button routerLink="/settings">
+                <IonItem button routerLink="/settings" class="sidebar-menu-link">
                   <IonIcon slot="start" icon={settings} />
                   <IonLabel>Settings</IonLabel>
                 </IonItem>
@@ -85,7 +63,7 @@ const App: React.FC = () => {
             </IonList>
           </IonContent>
 
-          <IonFooter style={{marginBottom: '-7px'}}>
+          <IonFooter style={{ marginBottom: '-7px' }}>
             <IonList>
               <IonItem>
                 <IonIcon slot="start" icon={moon} />
